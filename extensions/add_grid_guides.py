@@ -237,8 +237,8 @@ class Grid_Guides(inkex.Effect):
 
 		# main SVG document element (canvas)
 		svg = self.document.getroot()
-		canvas_width  = inkex.unittouu(svg.get('width'))
-		canvas_height = inkex.unittouu(svg.attrib['height'])
+		canvas_width  = inkex.Effect.unittouu(self, svg.get('width'))
+		canvas_height = inkex.Effect.unittouu(self, svg.attrib['height'])
 
 		# total width  (columns and gutters)
 		if has_outer_col_gutter:

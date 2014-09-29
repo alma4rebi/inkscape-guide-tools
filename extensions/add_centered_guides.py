@@ -99,8 +99,8 @@ class addCenteredGuides(inkex.Effect):
 		svg = self.document.getroot()
 
 		# getting the width and height attributes of the canvas
-		canvas_width  = inkex.unittouu(svg.get('width'))
-		canvas_height = inkex.unittouu(svg.attrib['height'])
+		canvas_width  = inkex.Effect.unittouu(self, svg.get('width'))
+		canvas_height = inkex.Effect.unittouu(self, svg.attrib['height'])
 
 		# calculate center of document
 		center_pos_x = canvas_width/2
