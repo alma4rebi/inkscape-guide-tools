@@ -51,14 +51,15 @@ def deleteGuidesByOrientation(document, orientation):
 	# depending on which type of guide to remove, remove them
 	if (orientation == 'all'):
 		for element in children:
-			namedview.remove(element)
+			if element.get('{http://www.inkscape.org/namespaces/inkscape}label') == 'guide_tools':
+				namedview.remove(element)
 	elif (orientation == 'horizontal'):
 		for element in children:
-			if (element.get('orientation') == '0,1'):
+			if element.get('{http://www.inkscape.org/namespaces/inkscape}label') == 'guide_tools' and (element.get('orientation') == '0,1'):
 				namedview.remove(element)
 	elif (orientation == 'vertical'):
 		for element in children:
-			if (element.get('orientation') == '1,0'):
+			if element.get('{http://www.inkscape.org/namespaces/inkscape}label') == 'guide_tools' and (element.get('orientation') == '1,0'):
 				namedview.remove(element)
 
 # Draw single guide
@@ -74,7 +75,9 @@ def drawGuide(position, orientation, parent):
 				positionString = "0," + str(position)
 
 		# Create a sodipodi:guide node
-		inkex.etree.SubElement(parent,'{http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd}guide',{'position':positionString,'orientation':orientationString})
+		inkex.etree.SubElement(parent,'{http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd}guide',{'position':positionString,'orientation':orientationString,
+'{http://www.inkscape.org/namespaces/inkscape}label':'guide_tools'
+})
 
 
 # Draw series of guides with or without gutter - same function called for columns and rows
